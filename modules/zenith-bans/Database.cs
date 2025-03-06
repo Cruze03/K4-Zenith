@@ -164,7 +164,7 @@ namespace Zenith_Bans
 						playerData.Overrides = playerDataRaw.OverridesString?.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(overrideStr =>
 						{
 							var parts = overrideStr.Split(':');
-							return parts.Length == 2 ? (parts[0], bool.Parse(parts[1])) : (null, false);
+							return parts.Length == 2 ? (parts[0], parts[1] == "1" || parts[1].ToLower() == "true") : (null, false);
 						}).Where(x => x.Item1 != null).ToDictionary(x => x.Item1!, x => x.Item2) ?? [];
 
 						DateTime? rankExpiry = playerData.RankExpiry?.IsValidDateTime == true ? (DateTime?)playerData.RankExpiry : null;
